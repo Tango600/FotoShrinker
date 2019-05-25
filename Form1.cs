@@ -167,6 +167,15 @@ namespace FotoShrinker
                     LoadSettings(configPath);
                 }
             }
+
+            toolStripFields.DropDownItems.AddRange(Snippets.GetFields().Select(s => new ToolStripMenuItem(s, null, OnSnippetFieldClick)).ToArray());
+        }
+
+        private void OnSnippetFieldClick(object sender, EventArgs e)
+        {
+            gridTAGs[0, gridTAGs.CurrentRow.Index].Value = gridTAGs[0, gridTAGs.CurrentRow.Index].Value + ((ToolStripMenuItem)sender).Text;
+            Modifyed = true;
+            statusPanelModify.Text = "*";
         }
 
         private void gridTasks_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)

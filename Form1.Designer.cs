@@ -32,6 +32,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbThreads = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.chWriteTag = new System.Windows.Forms.CheckBox();
             this.trbThreads = new System.Windows.Forms.TrackBar();
@@ -44,14 +45,6 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridTasks = new System.Windows.Forms.DataGridView();
-            this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnInFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnOutFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnMaxWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnQualety = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTagAll = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ColumnTAGResized = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ColumnExecute = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -62,7 +55,15 @@
             this.statusPanelModify = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusPanelTaskComplited = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileTask = new System.Windows.Forms.OpenFileDialog();
-            this.lbThreads = new System.Windows.Forms.Label();
+            this.toolStripFields = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnInFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnOutFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMaxWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQualety = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTagAll = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColumnTAGResized = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColumnExecute = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbThreads)).BeginInit();
             this.panel3.SuspendLayout();
@@ -90,6 +91,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(99, 202);
             this.panel1.TabIndex = 10;
+            // 
+            // lbThreads
+            // 
+            this.lbThreads.AutoSize = true;
+            this.lbThreads.Location = new System.Drawing.Point(61, 148);
+            this.lbThreads.Name = "lbThreads";
+            this.lbThreads.Size = new System.Drawing.Size(13, 13);
+            this.lbThreads.TabIndex = 8;
+            this.lbThreads.Text = "1";
             // 
             // label1
             // 
@@ -137,7 +147,7 @@
             this.panel3.Controls.Add(this.menuStrip1);
             this.panel3.Location = new System.Drawing.Point(107, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(565, 275);
+            this.panel3.Size = new System.Drawing.Size(579, 275);
             this.panel3.TabIndex = 12;
             // 
             // panel4
@@ -149,7 +159,7 @@
             this.panel4.Controls.Add(this.btSaveSettings);
             this.panel4.Location = new System.Drawing.Point(3, 241);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(558, 29);
+            this.panel4.Size = new System.Drawing.Size(572, 29);
             this.panel4.TabIndex = 14;
             // 
             // btRunAll
@@ -196,14 +206,15 @@
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3});
+            this.toolStripMenuItem3,
+            this.toolStripFields});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(119, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(119, 48);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(118, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem3.Text = "Удалить";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -225,13 +236,97 @@
             this.gridTasks.ContextMenuStrip = this.contextMenuStrip1;
             this.gridTasks.Location = new System.Drawing.Point(7, 27);
             this.gridTasks.Name = "gridTasks";
-            this.gridTasks.Size = new System.Drawing.Size(554, 209);
+            this.gridTasks.Size = new System.Drawing.Size(568, 209);
             this.gridTasks.TabIndex = 9;
             this.gridTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTasks_CellDoubleClick);
             this.gridTasks.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTasks_CellEndEdit);
             this.gridTasks.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridTasks_CellMouseClick);
             this.gridTasks.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridTasks_UserAddedRow);
             this.gridTasks.Click += new System.EventHandler(this.gridTasks_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(118, 22);
+            this.toolStripMenuItem2.Text = "Удалить";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(579, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 20);
+            this.toolStripMenuItem1.Text = "Задания";
+            // 
+            // открытьToolStripMenuItem
+            // 
+            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.открытьToolStripMenuItem.Text = "Открыть...";
+            this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusPanel1,
+            this.statusPanelModify,
+            this.statusPanelTaskComplited});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 280);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(686, 22);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusPanel1
+            // 
+            this.statusPanel1.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.statusPanel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusPanelModify
+            // 
+            this.statusPanelModify.Name = "statusPanelModify";
+            this.statusPanelModify.Size = new System.Drawing.Size(12, 17);
+            this.statusPanelModify.Text = "*";
+            // 
+            // statusPanelTaskComplited
+            // 
+            this.statusPanelTaskComplited.Name = "statusPanelTaskComplited";
+            this.statusPanelTaskComplited.Size = new System.Drawing.Size(13, 17);
+            this.statusPanelTaskComplited.Text = "0";
+            // 
+            // openFileTask
+            // 
+            this.openFileTask.DefaultExt = "txt";
+            this.openFileTask.FileName = "openFileDialog1";
+            this.openFileTask.Filter = "FS Tasks|*.txt";
+            this.openFileTask.RestoreDirectory = true;
+            // 
+            // toolStripFields
+            // 
+            this.toolStripFields.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.toolStripFields.Name = "toolStripFields";
+            this.toolStripFields.Size = new System.Drawing.Size(180, 22);
+            this.toolStripFields.Text = "Поля";
             // 
             // ColumnEnabled
             // 
@@ -289,105 +384,19 @@
             this.ColumnExecute.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnExecute.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColumnExecute.Text = ">>";
-            this.ColumnExecute.Width = 50;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(118, 22);
-            this.toolStripMenuItem2.Text = "Удалить";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(565, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 20);
-            this.toolStripMenuItem1.Text = "Задания";
-            // 
-            // открытьToolStripMenuItem
-            // 
-            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.открытьToolStripMenuItem.Text = "Открыть...";
-            this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusPanel1,
-            this.statusPanelModify,
-            this.statusPanelTaskComplited});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 280);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(672, 22);
-            this.statusStrip1.TabIndex = 13;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusPanel1
-            // 
-            this.statusPanel1.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.statusPanel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // statusPanelModify
-            // 
-            this.statusPanelModify.Name = "statusPanelModify";
-            this.statusPanelModify.Size = new System.Drawing.Size(12, 17);
-            this.statusPanelModify.Text = "*";
-            // 
-            // statusPanelTaskComplited
-            // 
-            this.statusPanelTaskComplited.Name = "statusPanelTaskComplited";
-            this.statusPanelTaskComplited.Size = new System.Drawing.Size(13, 17);
-            this.statusPanelTaskComplited.Text = "0";
-            // 
-            // openFileTask
-            // 
-            this.openFileTask.DefaultExt = "txt";
-            this.openFileTask.FileName = "openFileDialog1";
-            this.openFileTask.Filter = "FS Tasks|*.txt";
-            this.openFileTask.RestoreDirectory = true;
-            // 
-            // lbThreads
-            // 
-            this.lbThreads.AutoSize = true;
-            this.lbThreads.Location = new System.Drawing.Point(61, 148);
-            this.lbThreads.Name = "lbThreads";
-            this.lbThreads.Size = new System.Drawing.Size(13, 13);
-            this.lbThreads.TabIndex = 8;
-            this.lbThreads.Text = "1";
+            this.ColumnExecute.Width = 65;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 302);
+            this.ClientSize = new System.Drawing.Size(686, 302);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FotoShrinker";
+            this.Text = "Foto Shrinker";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -437,6 +446,8 @@
         private System.Windows.Forms.ToolStripStatusLabel statusPanel1;
         private System.Windows.Forms.ToolStripStatusLabel statusPanelModify;
         private System.Windows.Forms.ToolStripStatusLabel statusPanelTaskComplited;
+        private System.Windows.Forms.Label lbThreads;
+        private System.Windows.Forms.ToolStripMenuItem toolStripFields;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInFolder;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnOutFolder;
@@ -445,7 +456,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn ColumnTagAll;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnTAGResized;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnExecute;
-        private System.Windows.Forms.Label lbThreads;
     }
 }
 

@@ -24,6 +24,11 @@ namespace FotoShrinker
             public bool Resized { get; set; } = false;
         }
 
+        public static string[] GetFields()
+        {
+            return typeof(Snippet).GetProperties().Select(f => "{Snippet." + f.Name + "}").ToArray();
+        }
+
         public static string FormatWith(string Text, params object[] Objs)
         {
             string Result = Text;
