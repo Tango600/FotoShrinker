@@ -44,6 +44,7 @@
             this.ColumnTAG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripFields = new System.Windows.Forms.ToolStripMenuItem();
             this.gridTasks = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,10 +56,10 @@
             this.statusPanelModify = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusPanelTaskComplited = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileTask = new System.Windows.Forms.OpenFileDialog();
-            this.toolStripFields = new System.Windows.Forms.ToolStripMenuItem();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnInFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnOutFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRename = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnMaxWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnQualety = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTagAll = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -89,7 +90,7 @@
             this.panel1.Controls.Add(this.trbThreads);
             this.panel1.Location = new System.Drawing.Point(2, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(99, 202);
+            this.panel1.Size = new System.Drawing.Size(99, 244);
             this.panel1.TabIndex = 10;
             // 
             // lbThreads
@@ -147,7 +148,7 @@
             this.panel3.Controls.Add(this.menuStrip1);
             this.panel3.Location = new System.Drawing.Point(107, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(579, 275);
+            this.panel3.Size = new System.Drawing.Size(626, 275);
             this.panel3.TabIndex = 12;
             // 
             // panel4
@@ -159,7 +160,7 @@
             this.panel4.Controls.Add(this.btSaveSettings);
             this.panel4.Location = new System.Drawing.Point(3, 241);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(572, 29);
+            this.panel4.Size = new System.Drawing.Size(619, 29);
             this.panel4.TabIndex = 14;
             // 
             // btRunAll
@@ -188,7 +189,7 @@
             this.gridTAGs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnTAG});
             this.gridTAGs.ContextMenuStrip = this.contextMenuStrip2;
-            this.gridTAGs.Location = new System.Drawing.Point(172, 57);
+            this.gridTAGs.Location = new System.Drawing.Point(99, 73);
             this.gridTAGs.Name = "gridTAGs";
             this.gridTAGs.Size = new System.Drawing.Size(289, 145);
             this.gridTAGs.TabIndex = 10;
@@ -214,9 +215,16 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(118, 22);
             this.toolStripMenuItem3.Text = "Удалить";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripFields
+            // 
+            this.toolStripFields.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.toolStripFields.Name = "toolStripFields";
+            this.toolStripFields.Size = new System.Drawing.Size(118, 22);
+            this.toolStripFields.Text = "Поля";
             // 
             // gridTasks
             // 
@@ -228,6 +236,7 @@
             this.ColumnEnabled,
             this.ColumnInFolder,
             this.ColumnOutFolder,
+            this.ColumnRename,
             this.ColumnMaxWidth,
             this.ColumnQualety,
             this.ColumnTagAll,
@@ -236,7 +245,7 @@
             this.gridTasks.ContextMenuStrip = this.contextMenuStrip1;
             this.gridTasks.Location = new System.Drawing.Point(7, 27);
             this.gridTasks.Name = "gridTasks";
-            this.gridTasks.Size = new System.Drawing.Size(568, 209);
+            this.gridTasks.Size = new System.Drawing.Size(615, 209);
             this.gridTasks.TabIndex = 9;
             this.gridTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTasks_CellDoubleClick);
             this.gridTasks.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTasks_CellEndEdit);
@@ -264,7 +273,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(579, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(626, 24);
             this.menuStrip1.TabIndex = 15;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -291,7 +300,7 @@
             this.statusPanelTaskComplited});
             this.statusStrip1.Location = new System.Drawing.Point(0, 280);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(686, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(733, 22);
             this.statusStrip1.TabIndex = 13;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -321,16 +330,10 @@
             this.openFileTask.Filter = "FS Tasks|*.txt";
             this.openFileTask.RestoreDirectory = true;
             // 
-            // toolStripFields
-            // 
-            this.toolStripFields.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.toolStripFields.Name = "toolStripFields";
-            this.toolStripFields.Size = new System.Drawing.Size(180, 22);
-            this.toolStripFields.Text = "Поля";
-            // 
             // ColumnEnabled
             // 
             this.ColumnEnabled.FillWeight = 35F;
+            this.ColumnEnabled.Frozen = true;
             this.ColumnEnabled.HeaderText = "Вкл.";
             this.ColumnEnabled.Name = "ColumnEnabled";
             this.ColumnEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -339,15 +342,25 @@
             // 
             // ColumnInFolder
             // 
+            this.ColumnInFolder.Frozen = true;
             this.ColumnInFolder.HeaderText = "Источник";
             this.ColumnInFolder.Name = "ColumnInFolder";
             this.ColumnInFolder.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ColumnOutFolder
             // 
+            this.ColumnOutFolder.Frozen = true;
             this.ColumnOutFolder.HeaderText = "Назначение";
             this.ColumnOutFolder.Name = "ColumnOutFolder";
             this.ColumnOutFolder.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnRename
+            // 
+            this.ColumnRename.Frozen = true;
+            this.ColumnRename.HeaderText = "Переим.";
+            this.ColumnRename.Name = "ColumnRename";
+            this.ColumnRename.ToolTipText = "Переименование номером файла";
+            this.ColumnRename.Width = 55;
             // 
             // ColumnMaxWidth
             // 
@@ -367,6 +380,7 @@
             this.ColumnTagAll.Name = "ColumnTagAll";
             this.ColumnTagAll.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnTagAll.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnTagAll.ToolTipText = "TAG для всех файлов, в т.ч. и не для изменённых";
             this.ColumnTagAll.Width = 40;
             // 
             // ColumnTAGResized
@@ -375,6 +389,7 @@
             this.ColumnTAGResized.Name = "ColumnTAGResized";
             this.ColumnTAGResized.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnTAGResized.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnTAGResized.ToolTipText = "TAG для изменяемых";
             this.ColumnTAGResized.Width = 40;
             // 
             // ColumnExecute
@@ -390,7 +405,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 302);
+            this.ClientSize = new System.Drawing.Size(733, 302);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -451,6 +466,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInFolder;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnOutFolder;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnRename;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMaxWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQualety;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnTagAll;

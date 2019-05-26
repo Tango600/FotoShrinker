@@ -5,12 +5,12 @@ using System.Text;
 using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
 namespace FotoShrinker
 {
     public class Snippets
     {
-        [System.Serializable()]
         public class Snippet
         {
             public string Now { get; set; } = DateTime.Now.ToString("HH.mm.ss.ms");
@@ -18,7 +18,7 @@ namespace FotoShrinker
             public int Width { get; set; } = 0;
             public int Height { get; set; } = 0;
             public string Path { get; set; } = "";
-            public string Version { get; set; } = "PhotoShrinker 2.1";
+            public string Version { get; set; } = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             public string PCName { get; set; } = Environment.MachineName;
             public string UserName { get; set; } = Environment.UserName;
             public bool Resized { get; set; } = false;
@@ -32,7 +32,7 @@ namespace FotoShrinker
         public static string FormatWith(string Text, params object[] Objs)
         {
             string Result = Text;
-            CultureInfo provider = new CultureInfo("ru-RU");
+            CultureInfo provider = CultureInfo.CurrentUICulture;  // new CultureInfo("ru-RU");
 
             int i = 0;
             foreach (object ItemObject in Objs)

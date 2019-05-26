@@ -29,6 +29,7 @@ namespace FotoShrinker
             public int Quality;
             public string[] TagData = new string[0];
             public string[] TagResized = new string[0];
+            public bool Rename;
         }
 
         private List<SettingsData> Settings = new List<SettingsData>();
@@ -113,7 +114,7 @@ namespace FotoShrinker
 
         private class workerTask
         {
-            public SettingsData parametrs;
+            public SettingsData parametrs { get; set; }
             public int threads;
         }
 
@@ -122,10 +123,8 @@ namespace FotoShrinker
             runningTask++;
             statusPanelTaskComplited.Text = runningTask.ToString();
             workerTask p = (workerTask)e.Argument;
-            var st = DateTime.Now;
             ShrinkerClass shrinker = new ShrinkerClass();
-            shrinker.ShrinkFolder(p.parametrs.InFolder, p.parametrs.OutFolder, p.parametrs.maxWidth, p.parametrs.Quality, chWriteTag.Checked, p.parametrs.TagData, p.parametrs.TagResized, p.threads);
-            var et = DateTime.Now;
+            shrinker.ShrinkFolder(p.parametrs.InFolder, p.parametrs.OutFolder, p.parametrs.maxWidth, p.parametrs.Quality, chWriteTag.Checked, p.parametrs.TagData, p.parametrs.TagResized, p.threads, p.parametrs.Rename);
 
             e.Result = true;
         }
@@ -219,7 +218,8 @@ namespace FotoShrinker
                             maxWidth = Settings[e.RowIndex].maxWidth,
                             Quality = Settings[e.RowIndex].Quality,
                             TagData = Settings[e.RowIndex].TagData,
-                            TagResized = Settings[e.RowIndex].TagResized
+                            TagResized = Settings[e.RowIndex].TagResized,
+                            Rename = (bool)gridTasks.Rows[e.RowIndex].Cells[ColumnRename.Index].Value
                         }, trbThreads.Value);
                     }
                 }
@@ -256,6 +256,13 @@ namespace FotoShrinker
                 gridTAGs.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 gridTAGs.Hide();
             }
+            if (e.KeyCode == Keys.Enter && gridTAGs.Rows.Count == gridTAGs.CurrentRow.Index + 1 && gridTAGs.CurrentRow.Cells[0].Value != null && !string.IsNullOrEmpty(gridTAGs.CurrentRow.Cells[0].Value.ToString()))
+            {
+                var val = gridTAGs.CurrentRow.Cells[0].Value.ToString();
+                gridTAGs.CurrentRow.Cells[0].Value = "";
+                gridTAGs.Rows.Add();
+                gridTAGs.Rows[gridTAGs.Rows.Count - 2].Cells[0].Value = val;
+            }
         }
 
         private void btSaveSettings_Click(object sender, EventArgs e)
@@ -291,24 +298,23 @@ namespace FotoShrinker
 
         private void gridTAGs_VisibleChanged(object sender, EventArgs e)
         {
-            if (!gridTAGs.Visible)
-                if (gridTasks.CurrentRow.Index < Settings.Count)
+            if (!gridTAGs.Visible && gridTasks.CurrentRow.Index < Settings.Count)
+            {
+                int ri = gridTasks.CurrentRow.Index;
+                string[] tag = new string[0];
+                for (int i = 0; i < gridTAGs.RowCount - 1; i++)
                 {
-                    int ri = gridTasks.CurrentRow.Index;
-                    string[] tag = new string[0];
-                    for (int i = 0; i < gridTAGs.RowCount - 1; i++)
-                    {
-                        tag = tag.Concat(new string[1] { (string)gridTAGs.Rows[i].Cells[0].Value }).ToArray();
-                    }
-                    if ((int)gridTAGs.Tag == ColumnTAGResized.Index)
-                    {
-                        Settings[ri].TagResized = tag;
-                    }
-                    if ((int)gridTAGs.Tag == ColumnTagAll.Index)
-                    {
-                        Settings[ri].TagData = tag;
-                    }
+                    tag = tag.Concat(new string[1] { gridTAGs.Rows[i].Cells[0].Value.ToString() }).ToArray();
                 }
+                if ((int)gridTAGs.Tag == ColumnTAGResized.Index)
+                {
+                    Settings[ri].TagResized = tag;
+                }
+                if ((int)gridTAGs.Tag == ColumnTagAll.Index)
+                {
+                    Settings[ri].TagData = tag;
+                }
+            }
         }
 
         private void gridTasks_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -388,11 +394,10 @@ namespace FotoShrinker
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Modifyed)
-                if (MessageBox.Show("Изменения не сохранены, сохранить?", "Сохранить...", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    SaveSettings(tasksFilePath);
-                }
+            if (Modifyed && MessageBox.Show("Изменения не сохранены, сохранить?", "Сохранить...", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                SaveSettings(tasksFilePath);
+            }
         }
 
         private void trbThreads_Scroll(object sender, EventArgs e)

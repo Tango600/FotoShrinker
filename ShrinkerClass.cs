@@ -38,7 +38,7 @@ namespace FotoShrinker
             }
         }
 
-        public bool ShrinkFolder(string InFolder, string OutFolder, int maxWidth, int Quality, bool WriteTAG, IEnumerable<string> tagData, IEnumerable<string> tagResized, int ThreadsCount)
+        public bool ShrinkFolder(string InFolder, string OutFolder, int maxWidth, int Quality, bool WriteTAG, IEnumerable<string> tagData, IEnumerable<string> tagResized, int ThreadsCount, bool RenameToNum)
         {
             if (Directory.Exists(InFolder))
             {
@@ -49,13 +49,13 @@ namespace FotoShrinker
 
                 DirSearch(InFolder);
 
+                int fileNum = 1;
                 var tasks = new ConcurrentQueue<Task>();
                 foreach (var file in FilesList)
                 {
                     if (ThreadsCount > 1)
                         while (tasks.Count >= ThreadsCount)
                         {
-                            //Thread.Sleep(100);
                             Task.WaitAny(tasks.ToArray());
                         }
 
@@ -64,7 +64,7 @@ namespace FotoShrinker
                         string filename = Path.GetFullPath(file).Replace(InFolder, OutFolder);
                         if (!IsTag(file))
                         {
-                            var snip = Resize(file, InFolder, OutFolder, maxWidth, Quality);
+                            var snip = Resize(file, InFolder, OutFolder, maxWidth, Quality, RenameToNum ? fileNum++ : -1);
                             if (snip.Resized)
                             {
                                 if (WriteTAG)
@@ -95,19 +95,21 @@ namespace FotoShrinker
             return true;
         }
 
-        public Snippets.Snippet Resize(string FileName, string InFolder, string OutFilePath, int maxWidth, int Quality)
+        public Snippets.Snippet Resize(string FileName, string InFolder, string OutFilePath, int MaxWidth, int Quality, int FileNum)
         {
             if (!Directory.Exists(OutFilePath))
                 Directory.CreateDirectory(OutFilePath);
 
             long size = 0;
-            using (var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+            string filename = "";
+            if (FileNum == -1)
             {
-                size = fs.Length;
-                fs.Close();
+                filename = OutFilePath + Path.GetFileName(FileName);
             }
-
-            string filename = Path.GetFullPath(FileName).Replace(InFolder, OutFilePath);
+            else
+            {
+                filename = OutFilePath + "Image#" + FileNum + Path.GetExtension(FileName);
+            }
             string sdir = "";
             foreach (var dir in Path.GetDirectoryName(filename).Split(Path.DirectorySeparatorChar))
             {
@@ -120,7 +122,9 @@ namespace FotoShrinker
             Bitmap image;
             using (FileStream fsSource = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
+                size = fsSource.Length;
                 image = new Bitmap(fsSource);
+                fsSource.Close();
             }
             int originalWidth = image.Width;
             int originalHeight = image.Height;
@@ -134,9 +138,9 @@ namespace FotoShrinker
                 Resized = false
             };
 
-            if (Math.Max(originalWidth, originalHeight) > maxWidth + 10)
+            if (Math.Max(originalWidth, originalHeight) > MaxWidth + 10)
             {
-                float ratio = (float)maxWidth / (float)Math.Max(originalWidth, originalHeight);
+                float ratio = (float)MaxWidth / (float)Math.Max(originalWidth, originalHeight);
 
                 int newWidth = (int)(originalWidth * ratio);
                 int newHeight = (int)(originalHeight * ratio);
@@ -165,15 +169,14 @@ namespace FotoShrinker
                         using (FileStream fsImage = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Write))
                         {
                             newImage.Save(fsImage, imageCodecInfo, encoderParameters);
-                            snip.Resized = true;
                         }
                     }
-                    catch
+                    finally
                     {
-                        snip.Resized = false;
+
                     }
                 }
-
+                snip.Resized = true;
                 File.SetCreationTime(filename, fileDate);
                 File.SetLastWriteTime(filename, fileDate);
             }
