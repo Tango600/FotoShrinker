@@ -11,7 +11,6 @@ namespace FotoShrinker
 {
     public class Snippets
     {
-        [System.Serializable]
         public class Snippet
         {
             public string Now { get; set; } = DateTime.Now.ToString("HH.mm.ss.ms");

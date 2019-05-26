@@ -64,19 +64,7 @@ namespace FotoShrinker
                         string filename = Path.GetFullPath(file).Replace(InFolder, OutFolder);
                         if (!IsTag(file))
                         {
-                            var snip = Resize(file, InFolder, OutFolder, maxWidth, Quality, RenameToNum ? fileNum++ : -1);
-                            if (snip.Resized)
-                            {
-                                if (WriteTAG)
-                                {
-                                    WriteTag(filename, tagData.ToArray().Concat(tagResized.ToArray()).Select(f => Snippets.FormatWith(f, new object[1] { snip })).ToArray());
-                                }
-                            }
-                            else
-                            {
-                                if (WriteTAG)
-                                    WriteTag(filename, tagData);
-                            }
+                            Resize(file, InFolder, OutFolder, maxWidth, Quality, WriteTAG, tagData, tagResized, RenameToNum ? fileNum++ : -1);
                         }
                         else
                         {
@@ -95,7 +83,7 @@ namespace FotoShrinker
             return true;
         }
 
-        public Snippets.Snippet Resize(string FileName, string InFolder, string OutFilePath, int MaxWidth, int Quality, int FileNum)
+        public Snippets.Snippet Resize(string FileName, string InFolder, string OutFilePath, int MaxWidth, int Quality, bool WriteTAG, IEnumerable<string> tagData, IEnumerable<string> tagResized, int FileNum)
         {
             if (!Directory.Exists(OutFilePath))
                 Directory.CreateDirectory(OutFilePath);
@@ -177,6 +165,20 @@ namespace FotoShrinker
                     }
                 }
                 snip.Resized = true;
+
+                if (snip.Resized)
+                {
+                    if (WriteTAG)
+                    {
+                        WriteTag(filename, tagData.ToArray().Concat(tagResized.ToArray()).Select(f => Snippets.FormatWith(f, new object[1] { snip })).ToArray());
+                    }
+                }
+                else
+                {
+                    if (WriteTAG)
+                        WriteTag(filename, tagData);
+                }
+
                 File.SetCreationTime(filename, fileDate);
                 File.SetLastWriteTime(filename, fileDate);
             }
