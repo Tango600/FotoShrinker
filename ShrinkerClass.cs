@@ -23,12 +23,7 @@ namespace FotoShrinker
             {
                 foreach (string d in Directory.GetDirectories(sDir))
                 {
-                    foreach (string f in Directory.GetFiles(d, searchMask))
-                    {
-                        FilesList.Add(f);
-                    }
                     DirSearch(d);
-                    FilesList.AddRange(Directory.GetFiles(sDir, searchMask));
                 }
                 FilesList.AddRange(Directory.GetFiles(sDir, searchMask));
             }
