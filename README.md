@@ -1,0 +1,2 @@
+# FotoShrinker
+Group resize photo.
